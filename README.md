@@ -8,11 +8,21 @@ Proyek ini dibangun menggunakan **Django 6.x**, **Python 3.13**, dan package man
 
 ## Identitas Kelompok & Mahasiswa
 
-* **Nama:** Alif Paiq Saputra
-* **NIM:** L200240226
+| No | Nama Mahasiswa | NIM | Peran Utama | Akun GitHub |
+|---|---|---|---|---|
+| 1 | **Alif Paiq Saputra** | L200240226 | Backend, Arsitektur Database & Docker | [@Paiqputra](https://github.com/Paiqputra) |
+| 2 | **Farih Abdillah** | L200240234 | Fitur Pencarian Berita, CI/CD GitHub Actions & Testing | [@l200240234-web](https://github.com/l200240234-web) |
+
 * **Mata Kuliah:** Pemrograman Web berbasis Framework (TIF1336)
 * **Program Studi:** Informatika
 * **Perguruan Tinggi:** Universitas Muhammadiyah Surakarta
+
+### Tabel Pembagian Tugas & Kontribusi Anggota
+
+| Anggota | Rincian Kontribusi & Pengerjaan |
+|---|---|
+| **Alif Paiq Saputra** (L200240226) | 1. Inisialisasi struktur proyek Django 6 & dependensi package manager `uv`<br>2. Perancangan model data: `ProfilOrganisasi`, `Pimpinan`, `Majelis`, `Ranting`, `AmalUsaha`, `Agenda`, `Dokumen`, `SumberInformasi`<br>3. Pembuatan seeder data riil (`seed_pcm.py`) dari berkas SK dan AUM PCM Gatak<br>4. Implementasi base template responsif, Bootstrap 5, navbar, dan footer resmi<br>5. Konfigurasi `Dockerfile`, multi-stage build, user non-root, dan `compose.yaml` PostgreSQL 17 |
+| **Farih Abdillah** (L200240234) | 1. Implementasi **fitur pencarian berita** terpadu (`/berita/?q=...`) berbasis `Q` object Django (**Fitur Bonus +3**)<br>2. Integrasi search bar responsif dan pemeliharaan query pencarian pada kontrol paginasi<br>3. Setup workflow otomasi **GitHub Actions CI** (`.github/workflows/test.yml`) untuk test otomatis setiap push (**Fitur Bonus +4**)<br>4. Penambahan unit testing otomatis untuk validasi fungsionalitas pencarian berita<br>5. Dokumentasi identitas kelompok, transparansi kontribusi pengerjaan, dan pemutakhiran README |
 
 ---
 
@@ -79,12 +89,13 @@ pcm-gatak/
 3. **Pimpinan (`/pimpinan/`):** Pimpinan harian (Ketua & Sekretaris periode 2022–2027) serta susunan 9 Majelis pembantu pimpinan berdasarkan SK resmi bertanggal 16 Oktober 2023.
 4. **Ranting (`/ranting/`):** Daftar 14 Pimpinan Ranting Muhammadiyah (PRM) se-Kecamatan Gatak dalam tabel responsif dan kartu mobile. Nomor kontak pribadi pengurus disembunyikan demi privasi.
 5. **Amal Usaha (`/amal-usaha/`):** 23 unit AUM pendidikan dikelompokkan dalam 5 kategori: PAUD/TK (12 unit), MIM (6 unit), SMP (2 unit), Pesantren MBS (2 unit), dan SMA (1 unit).
-6. **Berita (`/berita/` & `/berita/<slug>/`):** Warta kegiatan terverifikasi dengan paginasi 6 artikel per halaman, detail berita, dan tautan artikel asli. Berita draf atau bertanggal masa depan otomatis merespons HTTP 404.
+6. **Berita (`/berita/` & `/berita/<slug>/`):** Warta kegiatan terverifikasi dengan **fitur pencarian kata kunci terpadu** (`/berita/?q=...`), paginasi 6 artikel per halaman, detail berita, dan tautan artikel asli. Berita draf atau bertanggal masa depan otomatis merespons HTTP 404.
 7. **Agenda (`/agenda/`):** Jadwal kegiatan yang dipisahkan antara agenda mendatang dan agenda yang telah terlaksana.
 8. **Unduhan (`/unduhan/`):** Pusat unduh berkas publikasi dan dokumen resmi.
 9. **Kontak (`/kontak/`):** Alamat sekretariat resmi dan formulir pesan masyarakat tersimpan ke database dengan notifikasi Django Messages.
 10. **Sumber Informasi (`/sumber-informasi/`):** Halaman transparansi yang merinci seluruh dokumen internal dan tautan website publik yang digunakan beserta tanggal akses.
 11. **Dashboard Admin (`/admin/`):** Panel "Admin Website PCM Gatak" dengan aturan singleton pada profil dan readonly pada pesan masuk.
+12. **Otomatisasi CI/CD:** GitHub Actions workflow yang otomatis menjalankan seluruh unit test pada setiap `git push` ke repositori.
 
 ---
 
