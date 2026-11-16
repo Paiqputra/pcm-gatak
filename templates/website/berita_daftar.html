@@ -12,6 +12,27 @@
     <p class="text-muted mx-auto mb-0" style="max-width: 650px;">
       Informasi seputar kegiatan dakwah, amal usaha, dan agenda persyarikatan PCM Gatak.
     </p>
+
+    <!-- Form Pencarian Berita -->
+    <div class="mt-4 mx-auto" style="max-width: 550px;">
+      <form method="get" action="{% url 'website:berita_daftar' %}" class="d-flex gap-2">
+        <div class="input-group shadow-sm">
+          <span class="input-group-text bg-white border-end-0 text-muted"><i class="bi bi-search"></i></span>
+          <input type="text" name="q" value="{{ query }}" class="form-control border-start-0" placeholder="Cari berita atau warta..." aria-label="Cari Berita">
+          <button class="btn btn-success px-4" type="submit">Cari</button>
+        </div>
+        {% if query %}
+          <a href="{% url 'website:berita_daftar' %}" class="btn btn-outline-secondary d-flex align-items-center" title="Reset Pencarian">
+            <i class="bi bi-x-lg"></i>
+          </a>
+        {% endif %}
+      </form>
+      {% if query %}
+        <p class="small text-muted mt-2 mb-0">
+          Menampilkan hasil pencarian untuk: <strong>"{{ query }}"</strong> ({{ total_hasil }} artikel ditemukan)
+        </p>
+      {% endif %}
+    </div>
   </div>
 </div>
 
@@ -36,7 +57,7 @@
       <ul class="pagination justify-content-center">
         {% if page_obj.has_previous %}
           <li class="page-item">
-            <a class="page-link text-success" href="?page={{ page_obj.previous_page_number }}">
+            <a class="page-link text-success" href="?page={{ page_obj.previous_page_number }}{% if query %}&q={{ query }}{% endif %}">
               <i class="bi bi-chevron-left me-1"></i>Sebelumnya
             </a>
           </li>
@@ -53,14 +74,14 @@
             </li>
           {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
             <li class="page-item">
-              <a class="page-link text-success" href="?page={{ num }}">{{ num }}</a>
+              <a class="page-link text-success" href="?page={{ num }}{% if query %}&q={{ query }}{% endif %}">{{ num }}</a>
             </li>
           {% endif %}
         {% endfor %}
 
         {% if page_obj.has_next %}
           <li class="page-item">
-            <a class="page-link text-success" href="?page={{ page_obj.next_page_number }}">
+            <a class="page-link text-success" href="?page={{ page_obj.next_page_number }}{% if query %}&q={{ query }}{% endif %}">
               Berikutnya<i class="bi bi-chevron-right ms-1"></i>
             </a>
           </li>

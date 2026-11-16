@@ -7,6 +7,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from django.core.paginator import Paginator
 from django.contrib import messages
+from django.db.models import Q
 from .models import (
     ProfilOrganisasi,
     Pimpinan,
@@ -111,15 +112,25 @@ def amal_usaha(request):
 
 
 def berita_daftar(request):
-    """Halaman Daftar Berita dengan Paginasi 6 artikel per halaman."""
+    """Halaman Daftar Berita dengan fitur pencarian dan paginasi 6 artikel per halaman."""
+    query = request.GET.get('q', '').strip()
     berita_qs = Berita.objects.terbit()
-    paginator = Paginator(berita_qs, 6)
 
+    if query:
+        berita_qs = berita_qs.filter(
+            Q(judul__icontains=query) |
+            Q(ringkasan__icontains=query) |
+            Q(isi__icontains=query)
+        )
+
+    paginator = Paginator(berita_qs, 6)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
     context = {
         'page_obj': page_obj,
+        'query': query,
+        'total_hasil': berita_qs.count() if query else None,
     }
     return render(request, 'website/berita_daftar.html', context)
 

@@ -215,3 +215,18 @@ class PCMWebsiteTests(TestCase):
         )
         self.assertNotEqual(berita_kembar_1.slug, berita_kembar_2.slug)
         self.assertTrue(berita_kembar_2.slug.startswith("kegiatan-tabligh-akbar-gatak"))
+
+    # ------------------------------------------------------------------------
+    # Test 8: Fitur Pencarian Berita (Bonus Rubrik)
+    # ------------------------------------------------------------------------
+    def test_pencarian_berita_berhasil(self):
+        url = reverse('website:berita_daftar') + '?q=Terbit'
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, self.berita_terbit.judul)
+
+    def test_pencarian_berita_tidak_ditemukan(self):
+        url = reverse('website:berita_daftar') + '?q=KataKunciYangTidakMungkinAda123'
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertNotContains(response, self.berita_terbit.judul)
