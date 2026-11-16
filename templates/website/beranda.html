@@ -1,0 +1,264 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}PCM GATAK — Pimpinan Cabang Muhammadiyah Gatak{% endblock %}
+
+{% block content %}
+<!-- 1. Hero Section -->
+<section class="hero-section">
+  <div class="container position-relative z-1">
+    <div class="row align-items-center g-4 g-lg-5">
+      <div class="col-lg-7 text-center text-lg-start">
+        <span class="badge bg-white text-success px-3 py-2 rounded-pill fw-semibold mb-3 shadow-sm d-inline-block">
+          <i class="bi bi-geo-alt-fill me-1 text-warning"></i> Cabang Muhammadiyah Gatak, Sukoharjo
+        </span>
+        <h1 class="hero-title">Membangun Umat, Menguatkan Persyarikatan</h1>
+        <p class="hero-subtitle">
+          Informasi, kegiatan dakwah, dan kontribusi nyata Muhammadiyah untuk masyarakat di wilayah Kecamatan Gatak, Kabupaten Sukoharjo.
+        </p>
+        <div class="d-flex flex-wrap gap-2 gap-sm-3 justify-content-center justify-content-lg-start">
+          <a href="{% url 'website:profil' %}" class="btn btn-warning text-dark fw-bold px-4 py-2 rounded-3 shadow">
+            <i class="bi bi-info-circle-fill me-1"></i> Mengenal PCM Gatak
+          </a>
+          <a href="{% url 'website:agenda' %}" class="btn btn-muh-outline-light px-4 py-2 rounded-3">
+            <i class="bi bi-calendar-event me-1"></i> Jelajahi Kegiatan
+          </a>
+        </div>
+      </div>
+      <div class="col-lg-5 text-center">
+        <div class="hero-img-card p-4 mx-auto" style="max-width: 380px;">
+          <img src="{% static 'img/logo-pcm.png' %}" alt="Logo PCM Gatak" class="img-fluid mb-3 mx-auto" style="max-height: 200px; object-fit: contain;">
+          <h5 class="fw-bold text-dark mb-1">PCM GATAK</h5>
+          <p class="small text-muted mb-0">Gerakan Islam Amar Ma'ruf Nahi Munkar</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2. Statistik Organisasi Terverifikasi -->
+<section class="py-4 py-md-5" style="margin-top: -2rem; position: relative; z-index: 2;">
+  <div class="container">
+    <div class="row g-3 g-md-4 justify-content-center">
+      <div class="col-6 col-lg-3">
+        <div class="stat-card">
+          <div class="stat-number">
+            <i class="bi bi-diagram-3-fill me-1 text-success"></i>{{ jumlah_ranting }}
+          </div>
+          <div class="stat-label">Ranting PRM</div>
+          <small class="text-muted small">14 Ranting Desa se-Gatak</small>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="stat-card">
+          <div class="stat-number">
+            <i class="bi bi-mortarboard-fill me-1 text-success"></i>{{ jumlah_amal_usaha }}
+          </div>
+          <div class="stat-label">Unit AUM Pendidikan</div>
+          <small class="text-muted small">PAUD, MIM, SMP, MBS, SMA</small>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="stat-card">
+          <div class="stat-number">
+            <i class="bi bi-grid-3x3-gap-fill me-1 text-success"></i>{{ jumlah_majelis }}
+          </div>
+          <div class="stat-label">Majelis Pembantu</div>
+          <small class="text-muted small">SK Resmi 16 Oktober 2023</small>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="stat-card">
+          <div class="stat-number fs-4">
+            <i class="bi bi-people-fill me-1 text-success"></i>{{ jumlah_anggota }}
+          </div>
+          <div class="stat-label">Anggota Ber-KTAM</div>
+          <small class="text-muted small">Data belum diverifikasi</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. Tentang PCM Gatak Ringkas -->
+<section class="py-4 py-md-5">
+  <div class="container">
+    <div class="row align-items-center g-4 g-lg-5">
+      <div class="col-lg-7">
+        <div class="section-tag">Tentang Kami</div>
+        <h2 class="section-title">Gerakan Pencerahan di Wilayah Gatak</h2>
+        <p class="text-muted leading-relaxed mb-4">
+          {{ profil.tentang|default:"Pimpinan Cabang Muhammadiyah (PCM) Gatak adalah struktur persyarikatan di tingkat Kecamatan Gatak, Kabupaten Sukoharjo. Beralamat sekretariat di Jogahan, Trangsan, Gatak. PCM Gatak menaungi 14 Pimpinan Ranting Muhammadiyah (PRM) dan 23 unit amal usaha pendidikan." }}
+        </p>
+        <div class="d-flex flex-wrap gap-2 gap-sm-3">
+          <a href="{% url 'website:profil' %}" class="btn btn-muh-primary">
+            Baca Profil & Sejarah Lengkap <i class="bi bi-arrow-right ms-1"></i>
+          </a>
+          <a href="{% url 'website:pimpinan' %}" class="btn btn-muh-outline-primary">
+            Susunan Pimpinan & Majelis
+          </a>
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <div class="card card-custom p-4 bg-light border-0">
+          <h5 class="fw-bold text-success mb-3">
+            <i class="bi bi-geo-alt-fill me-2"></i>Sekretariat Cabang
+          </h5>
+          <p class="text-dark mb-3">
+            <strong>Alamat:</strong> {{ profil.alamat_sekretariat }}
+          </p>
+          <div class="p-3 bg-white rounded-3 border">
+            <div class="small text-muted mb-1">Status Kepemimpinan:</div>
+            <div class="fw-bold text-dark">Periode Muktamar ke-48 (2022–2027)</div>
+            <div class="small text-muted mt-1">Ketua: Drs. H. Rombe Mustajab, M.Hum.</div>
+            <div class="small text-muted">Sekretaris: Drs. Shodiq Purnomo, M.M.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. Berita Terbaru Terverifikasi -->
+<section class="py-5 bg-white border-top border-bottom">
+  <div class="container">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end mb-4 gap-2">
+      <div>
+        <div class="section-tag">Warta & Kabar</div>
+        <h2 class="section-title mb-0">Berita & Informasi Terkini</h2>
+      </div>
+      <a href="{% url 'website:berita_daftar' %}" class="btn btn-muh-outline-primary align-self-start align-self-md-auto">
+        Lihat Semua Berita <i class="bi bi-arrow-right ms-1"></i>
+      </a>
+    </div>
+
+    <div class="row g-4">
+      {% for berita in berita_terbaru %}
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="card card-custom h-100 d-flex flex-column">
+            <div class="p-4 flex-grow-1">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <span class="badge bg-success-subtle text-success small">{{ berita.kategori|default:"Warta" }}</span>
+                <small class="text-muted"><i class="bi bi-calendar3 me-1"></i>{{ berita.tanggal_terbit|date:"d M Y" }}</small>
+              </div>
+              <h5 class="fw-bold mb-2">
+                <a href="{% url 'website:berita_detail' slug=berita.slug %}" class="text-decoration-none text-dark hover-green">
+                  {{ berita.judul }}
+                </a>
+              </h5>
+              <p class="text-muted small mb-3">
+                {{ berita.ringkasan|truncatewords:22 }}
+              </p>
+              {% if berita.catatan_redaksi %}
+                <div class="small text-muted fst-italic p-2 bg-light rounded-2 border-start border-2 border-warning mb-2">
+                  <i class="bi bi-info-circle me-1"></i>{{ berita.catatan_redaksi }}
+                </div>
+              {% endif %}
+            </div>
+            <div class="p-4 pt-0 mt-auto border-top">
+              <div class="d-flex justify-content-between align-items-center pt-3">
+                <a href="{% url 'website:berita_detail' slug=berita.slug %}" class="btn btn-sm btn-outline-success fw-semibold">
+                  Baca Selengkapnya <i class="bi bi-arrow-right ms-1"></i>
+                </a>
+                {% if berita.sumber_url %}
+                  <a href="{{ berita.sumber_url }}" target="_blank" rel="noopener noreferrer" class="badge-sumber text-decoration-none" title="Buka sumber asli">
+                    <i class="bi bi-link-45deg me-1"></i>{{ berita.sumber_nama|truncatechars:18 }}
+                  </a>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      {% empty %}
+        <div class="col-12 text-center py-5">
+          <p class="text-muted">Belum ada berita yang diterbitkan saat ini.</p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- 5. Agenda & Preview Amal Usaha -->
+<section class="py-5">
+  <div class="container">
+    <div class="row g-4 g-lg-5">
+      <!-- Agenda -->
+      <div class="col-12 col-lg-6">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <div>
+            <div class="section-tag">Jadwal & Agenda</div>
+            <h3 class="fw-bold mb-0">Agenda Terdekat</h3>
+          </div>
+          <a href="{% url 'website:agenda' %}" class="small text-success fw-bold text-decoration-none">
+            Semua Agenda <i class="bi bi-chevron-right"></i>
+          </a>
+        </div>
+
+        <div class="d-flex flex-column gap-3">
+          {% for ag in agenda_terbaru %}
+            <div class="card card-custom p-3">
+              <div class="d-flex gap-3 align-items-center">
+                <div class="text-center p-2 rounded bg-success text-white flex-shrink-0" style="min-width: 60px;">
+                  <div class="fw-bold fs-5 leading-none">{{ ag.waktu_mulai|date:"d" }}</div>
+                  <small class="text-uppercase" style="font-size: 0.7rem;">{{ ag.waktu_mulai|date:"M" }}</small>
+                </div>
+                <div>
+                  <h6 class="fw-bold mb-1">{{ ag.nama_kegiatan }}</h6>
+                  <small class="text-muted d-block">
+                    <i class="bi bi-clock me-1"></i>{{ ag.waktu_mulai|date:"H:i" }} WIB &nbsp;|&nbsp;
+                    <i class="bi bi-geo-alt me-1"></i>{{ ag.tempat }}
+                  </small>
+                </div>
+              </div>
+            </div>
+          {% empty %}
+            <p class="text-muted">Belum ada agenda mendatang yang terjadwal.</p>
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- Preview AUM Pendidikan -->
+      <div class="col-12 col-lg-6">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <div>
+            <div class="section-tag">Amal Usaha</div>
+            <h3 class="fw-bold mb-0">Amal Usaha Pendidikan (AUM)</h3>
+          </div>
+          <a href="{% url 'website:amal_usaha' %}" class="small text-success fw-bold text-decoration-none">
+            Lihat 23 Unit AUM <i class="bi bi-chevron-right"></i>
+          </a>
+        </div>
+
+        <div class="row g-2 g-sm-3">
+          {% for aum in amal_usaha_preview %}
+            <div class="col-6">
+              <div class="card card-custom p-3 h-100">
+                <span class="badge badge-muh align-self-start mb-2">{{ aum.get_kategori_pendidikan_display }}</span>
+                <h6 class="fw-bold text-dark mb-1 fs-6">{{ aum.nama }}</h6>
+                <small class="text-muted d-block mt-auto" style="font-size: 0.775rem;">
+                  <i class="bi bi-geo-alt me-1"></i>{{ aum.alamat }}
+                </small>
+              </div>
+            </div>
+          {% empty %}
+            <p class="text-muted">Data amal usaha belum tersedia.</p>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. Call To Action -->
+<section class="py-5 text-white" style="background: linear-gradient(135deg, #073e22 0%, #0b5e34 100%);">
+  <div class="container text-center py-3">
+    <h2 class="fw-bold mb-3">Mari Bersinergi Memajukan Gatak</h2>
+    <p class="lead opacity-90 mx-auto mb-4" style="max-width: 650px; font-size: 1.05rem;">
+      Sampaikan masukan, informasi, atau jalin kerja sama dakwah bersama Pimpinan Cabang Muhammadiyah Gatak.
+    </p>
+    <a href="{% url 'website:kontak' %}" class="btn btn-warning text-dark fw-bold px-4 py-2 rounded-3 shadow">
+      <i class="bi bi-envelope-paper-fill me-1"></i> Hubungi Sekretariat PCM Gatak
+    </a>
+  </div>
+</section>
+{% endblock %}
