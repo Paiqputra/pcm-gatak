@@ -1,0 +1,516 @@
+/* ==========================================================================
+   Website Pimpinan Cabang Muhammadiyah (PCM) Gatak
+   Responsive Design, Modern Typography, Clean Layout & Muhammadiyah Identity
+   ========================================================================== */
+
+:root {
+  --muh-green-primary: #0b5e34;
+  --muh-green-dark: #073e22;
+  --muh-green-light: #158047;
+  --muh-green-soft: #eaf6ee;
+  --muh-green-badge: #d1fae5;
+  --muh-gold: #e5a919;
+  --muh-gold-soft: #fef3c7;
+  --text-dark: #0f172a;
+  --text-body: #334155;
+  --text-muted: #64748b;
+  --bg-light: #f8fafc;
+  --white: #ffffff;
+  --border-color: #e2e8f0;
+  --border-light: #f1f5f9;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.08), 0 2px 4px -1px rgba(0,0,0,0.04);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px -2px rgba(0,0,0,0.03);
+}
+
+/* Base Settings & Zero Horizontal Overflow */
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  color: var(--text-body);
+  background-color: var(--bg-light);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+main {
+  flex: 1 0 auto;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* --------------------------------------------------------------------------
+   Top Bar
+   -------------------------------------------------------------------------- */
+.top-bar {
+  background-color: var(--muh-green-dark);
+  color: #d1fae5;
+  font-size: 0.825rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.top-bar a {
+  color: #d1fae5;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.top-bar a:hover {
+  color: #ffffff;
+}
+
+/* --------------------------------------------------------------------------
+   Navbar & Mobile Navigation
+   -------------------------------------------------------------------------- */
+.navbar-pcm {
+  background-color: var(--white);
+  box-shadow: var(--shadow-sm);
+  padding: 0.65rem 0;
+  transition: all 0.3s ease;
+  z-index: 1030;
+}
+
+.navbar-brand-logo {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.brand-text-main {
+  font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+  font-weight: 800;
+  color: var(--muh-green-primary);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.brand-text-sub {
+  font-size: 0.725rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.nav-link {
+  font-weight: 600;
+  font-size: 0.925rem;
+  color: #1e293b !important;
+  padding: 0.6rem 0.85rem !important;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+.nav-link:hover, .nav-link.active {
+  color: var(--muh-green-primary) !important;
+  background-color: var(--muh-green-soft);
+}
+
+.navbar-toggler {
+  padding: 0.5rem 0.65rem;
+  font-size: 1.25rem;
+  min-height: 44px;
+  min-width: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* --------------------------------------------------------------------------
+   Hero Section with Fluid Typography
+   -------------------------------------------------------------------------- */
+.hero-section {
+  background: linear-gradient(135deg, var(--muh-green-dark) 0%, var(--muh-green-primary) 100%);
+  color: var(--white);
+  padding: clamp(2.5rem, 6vw, 4.75rem) 0 clamp(2rem, 5vw, 4rem);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 85% 20%, rgba(255,255,255,0.08) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.hero-title {
+  font-size: clamp(1.85rem, 4.5vw, 2.75rem);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  margin-bottom: 1.15rem;
+}
+
+.hero-subtitle {
+  font-size: clamp(0.95rem, 2vw, 1.15rem);
+  color: #dcfce7;
+  line-height: 1.6;
+  max-width: 620px;
+  margin-bottom: 1.75rem;
+}
+
+.hero-img-card {
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  border: 3px solid rgba(255,255,255,0.25);
+  background-color: var(--white);
+}
+
+/* --------------------------------------------------------------------------
+   Cards, Badges & Buttons
+   -------------------------------------------------------------------------- */
+.card-custom {
+  background: var(--white);
+  border: 1px solid var(--border-color);
+  border-radius: 0.85rem;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  overflow: hidden;
+}
+
+.card-custom:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  border-color: #cbd5e1;
+}
+
+.stat-card {
+  background: var(--white);
+  border: 1px solid var(--border-color);
+  border-radius: 0.85rem;
+  padding: 1.25rem 1rem;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.25s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.stat-card:hover {
+  border-color: var(--muh-green-primary);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.stat-number {
+  font-size: clamp(1.75rem, 3.5vw, 2.25rem);
+  font-weight: 800;
+  color: var(--muh-green-primary);
+  line-height: 1.1;
+  margin-bottom: 0.35rem;
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  color: var(--text-dark);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.25rem;
+}
+
+.btn-muh-primary {
+  background-color: var(--muh-green-primary);
+  border-color: var(--muh-green-primary);
+  color: var(--white);
+  font-weight: 600;
+  padding: 0.65rem 1.4rem;
+  border-radius: 0.5rem;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  transition: all 0.2s ease;
+}
+
+.btn-muh-primary:hover {
+  background-color: var(--muh-green-dark);
+  border-color: var(--muh-green-dark);
+  color: var(--white);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-muh-outline-light {
+  background-color: transparent;
+  border: 2px solid rgba(255,255,255,0.85);
+  color: var(--white);
+  font-weight: 600;
+  padding: 0.6rem 1.35rem;
+  border-radius: 0.5rem;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  transition: all 0.2s ease;
+}
+
+.btn-muh-outline-light:hover {
+  background-color: var(--white);
+  border-color: var(--white);
+  color: var(--muh-green-dark);
+}
+
+.btn-muh-outline-primary {
+  background-color: transparent;
+  border: 2px solid var(--muh-green-primary);
+  color: var(--muh-green-primary);
+  font-weight: 600;
+  padding: 0.55rem 1.25rem;
+  border-radius: 0.5rem;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  transition: all 0.2s ease;
+}
+
+.btn-muh-outline-primary:hover {
+  background-color: var(--muh-green-primary);
+  color: var(--white);
+}
+
+.badge-muh {
+  background-color: var(--muh-green-soft);
+  color: var(--muh-green-primary);
+  font-weight: 700;
+  border-radius: 9999px;
+  padding: 0.35rem 0.8rem;
+  font-size: 0.775rem;
+  display: inline-block;
+}
+
+.badge-sumber {
+  background-color: #f1f5f9;
+  color: #475569;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+}
+
+/* --------------------------------------------------------------------------
+   Section Headers
+   -------------------------------------------------------------------------- */
+.section-tag {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--muh-green-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.35rem;
+}
+
+.section-title {
+  font-size: clamp(1.45rem, 3.2vw, 2rem);
+  font-weight: 800;
+  color: var(--muh-green-dark);
+  letter-spacing: -0.02em;
+  margin-bottom: 0.65rem;
+}
+
+.section-desc {
+  color: var(--text-muted);
+  font-size: 1rem;
+  max-width: 650px;
+  margin: 0 auto 2rem;
+}
+
+/* --------------------------------------------------------------------------
+   Majelis & Pengurus Styling
+   -------------------------------------------------------------------------- */
+.majelis-header {
+  background-color: #f8fafc;
+  border-left: 4px solid var(--muh-green-primary);
+  padding: 1rem 1.25rem;
+  border-radius: 0.5rem 0.5rem 0 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.pengurus-pill {
+  background-color: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  padding: 0.6rem 0.85rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+}
+
+/* --------------------------------------------------------------------------
+   Tables
+   -------------------------------------------------------------------------- */
+.table-custom {
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  width: 100%;
+}
+
+.table-custom thead {
+  background-color: var(--muh-green-primary);
+  color: var(--white);
+}
+
+.table-custom thead th {
+  padding: 0.85rem 1.15rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  border: none;
+  white-space: nowrap;
+}
+
+.table-custom tbody tr {
+  background-color: var(--white);
+  transition: background-color 0.15s ease;
+}
+
+.table-custom tbody tr:hover {
+  background-color: #f1f5f9;
+}
+
+.table-custom tbody td {
+  padding: 0.85rem 1.15rem;
+  border-top: 1px solid var(--border-color);
+  font-size: 0.9rem;
+  vertical-align: middle;
+}
+
+/* --------------------------------------------------------------------------
+   Footer
+   -------------------------------------------------------------------------- */
+.footer-pcm {
+  background-color: var(--muh-green-dark);
+  color: #cbd5e1;
+  padding: clamp(2.5rem, 5vw, 4rem) 0 1.25rem;
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+  border-top: 4px solid var(--muh-gold);
+}
+
+.footer-title {
+  color: var(--white);
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li {
+  margin-bottom: 0.55rem;
+}
+
+.footer-links a {
+  color: #cbd5e1;
+  text-decoration: none;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+  display: inline-block;
+}
+
+.footer-links a:hover {
+  color: var(--white);
+  padding-left: 3px;
+}
+
+.footer-attribution {
+  background-color: #042514;
+  padding: 1.25rem 0;
+  font-size: 0.8rem;
+  color: #94a3b8;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+.footer-disclaimer-box {
+  background-color: rgba(229, 169, 25, 0.12);
+  border-left: 3px solid var(--muh-gold);
+  padding: 0.65rem 0.85rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  color: #fef08a;
+  margin-top: 1.25rem;
+  line-height: 1.5;
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Media Queries
+   -------------------------------------------------------------------------- */
+/* Smartphone (max-width: 576px) */
+@media (max-width: 576px) {
+  .navbar-nav {
+    padding-top: 0.75rem;
+  }
+  .nav-link {
+    padding: 0.5rem 0.5rem !important;
+  }
+  .hero-section {
+    text-align: center;
+  }
+  .hero-subtitle {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hero-section .d-flex {
+    justify-content: center;
+  }
+  .stat-card {
+    padding: 1rem 0.75rem;
+  }
+  .table-responsive {
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+  }
+}
+
+/* Tablet (577px to 991px) */
+@media (min-width: 577px) and (max-width: 991px) {
+  .hero-section {
+    padding: 3rem 0;
+  }
+}
+
+/* Desktop (min-width: 992px) */
+@media (min-width: 992px) {
+  .container {
+    max-width: 1200px;
+  }
+}
