@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Amal Usaha Pendidikan (AUM) | PCM GATAK{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<div class="py-4 py-md-5 bg-white border-bottom">
+  <div class="container text-center">
+    <span class="badge badge-muh mb-2">Amal Usaha Muhammadiyah (AUM)</span>
+    <h1 class="fw-extrabold text-dark mb-2">23 Unit Pendidikan Muhammadiyah di Gatak</h1>
+    <p class="text-muted mx-auto mb-0" style="max-width: 650px;">
+      Data resmi berdasarkan dokumen <em>"Amal usaha yang dimiliki.docx"</em> mulai dari jenjang PAUD/TK, Madrasah Ibtidaiyah, SMP, Pesantren (MBS), hingga SMA.
+    </p>
+  </div>
+</div>
+
+<div class="container py-4 py-md-5">
+
+  <!-- Nav Tabs Responsif -->
+  <ul class="nav nav-pills justify-content-center mb-4 gap-2 flex-wrap" id="aumTab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active px-3 py-2 fw-semibold rounded-pill small" id="paud-tab" data-bs-toggle="pill" data-bs-target="#paud" type="button" role="tab">
+        <i class="bi bi-balloon-fill me-1"></i> PAUD & TK ({{ paud_tk.count }})
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link px-3 py-2 fw-semibold rounded-pill small" id="mim-tab" data-bs-toggle="pill" data-bs-target="#mim" type="button" role="tab">
+        <i class="bi bi-mortarboard-fill me-1"></i> Madrasah Ibtidaiyah ({{ mim.count }})
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link px-3 py-2 fw-semibold rounded-pill small" id="smp-tab" data-bs-toggle="pill" data-bs-target="#smp" type="button" role="tab">
+        <i class="bi bi-building me-1"></i> SMP ({{ smp.count }})
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link px-3 py-2 fw-semibold rounded-pill small" id="mbs-tab" data-bs-toggle="pill" data-bs-target="#mbs" type="button" role="tab">
+        <i class="bi bi-house-door-fill me-1"></i> Pesantren MBS ({{ boarding_school.count }})
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link px-3 py-2 fw-semibold rounded-pill small" id="sma-tab" data-bs-toggle="pill" data-bs-target="#sma" type="button" role="tab">
+        <i class="bi bi-backpack-fill me-1"></i> SMA ({{ sma.count }})
+      </button>
+    </li>
+  </ul>
+
+  <!-- Tab Contents -->
+  <div class="tab-content" id="aumTabContent">
+
+    <!-- 1. PAUD & TK -->
+    <div class="tab-pane fade show active" id="paud" role="tabpanel">
+      <div class="row g-3 g-md-4">
+        {% for a in paud_tk %}
+          <div class="col-12 col-sm-6 col-lg-4">
+            <div class="card card-custom h-100 p-4 border-top border-3 border-success">
+              <span class="badge bg-success-subtle text-success align-self-start mb-2">PAUD & TK</span>
+              <h5 class="fw-bold mb-2 fs-6">{{ a.nama }}</h5>
+              <p class="text-muted small flex-grow-1 mb-3">{{ a.deskripsi }}</p>
+              <div class="pt-2 border-top mt-auto small text-muted">
+                <i class="bi bi-geo-alt-fill text-warning me-1"></i>{{ a.alamat }}
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- 2. Madrasah Ibtidaiyah (MIM) -->
+    <div class="tab-pane fade" id="mim" role="tabpanel">
+      <div class="row g-3 g-md-4">
+        {% for a in mim %}
+          <div class="col-12 col-sm-6 col-lg-4">
+            <div class="card card-custom h-100 p-4 border-top border-3 border-primary">
+              <span class="badge bg-primary-subtle text-primary align-self-start mb-2">Madrasah Ibtidaiyah</span>
+              <h5 class="fw-bold mb-2 fs-6">{{ a.nama }}</h5>
+              <p class="text-muted small flex-grow-1 mb-3">{{ a.deskripsi }}</p>
+              <div class="pt-2 border-top mt-auto small text-muted">
+                <i class="bi bi-geo-alt-fill text-warning me-1"></i>{{ a.alamat }}
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- 3. SMP Muhammadiyah -->
+    <div class="tab-pane fade" id="smp" role="tabpanel">
+      <div class="row g-3 g-md-4">
+        {% for a in smp %}
+          <div class="col-12 col-md-6">
+            <div class="card card-custom h-100 p-4 border-top border-3 border-info">
+              <span class="badge bg-info-subtle text-info-emphasis align-self-start mb-2">Sekolah Menengah Pertama</span>
+              <h5 class="fw-bold mb-2">{{ a.nama }}</h5>
+              <p class="text-muted small flex-grow-1 mb-3">{{ a.deskripsi }}</p>
+              <div class="pt-2 border-top mt-auto small text-muted">
+                <i class="bi bi-geo-alt-fill text-warning me-1"></i>{{ a.alamat }}
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- 4. Muhammadiyah Boarding School (MBS) -->
+    <div class="tab-pane fade" id="mbs" role="tabpanel">
+      <div class="row g-3 g-md-4">
+        {% for a in boarding_school %}
+          <div class="col-12 col-md-6">
+            <div class="card card-custom h-100 p-4 border-top border-3 border-warning">
+              <span class="badge bg-warning-subtle text-warning-emphasis align-self-start mb-2">Boarding School (MBS)</span>
+              <h5 class="fw-bold mb-2">{{ a.nama }}</h5>
+              <p class="text-muted small flex-grow-1 mb-3">{{ a.deskripsi }}</p>
+              <div class="pt-2 border-top mt-auto small text-muted">
+                <i class="bi bi-geo-alt-fill text-warning me-1"></i>{{ a.alamat }}
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- 5. SMA Muhammadiyah -->
+    <div class="tab-pane fade" id="sma" role="tabpanel">
+      <div class="row g-3 g-md-4">
+        {% for a in sma %}
+          <div class="col-12 col-md-8 mx-auto">
+            <div class="card card-custom h-100 p-4 border-top border-3 border-danger">
+              <span class="badge bg-danger-subtle text-danger align-self-start mb-2">Sekolah Menengah Atas</span>
+              <h5 class="fw-bold mb-2">{{ a.nama }}</h5>
+              <p class="text-muted small flex-grow-1 mb-3">{{ a.deskripsi }}</p>
+              <div class="pt-2 border-top mt-auto small text-muted">
+                <i class="bi bi-geo-alt-fill text-warning me-1"></i>{{ a.alamat }}
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
+  </div>
+
+  <div class="text-center mt-5">
+    <div class="card card-custom p-3 bg-light border-0 d-inline-block">
+      <small class="text-muted">
+        <i class="bi bi-info-circle me-1"></i> Data AUM merujuk pada dokumen resmi inventarisasi <em>"Amal usaha yang dimiliki.docx"</em>.
+      </small>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

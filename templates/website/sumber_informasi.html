@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Sumber Informasi & Transparansi Data | PCM GATAK{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<div class="py-4 py-md-5 bg-white border-bottom">
+  <div class="container text-center">
+    <span class="badge badge-muh mb-2">Transparansi & Integritas Akademik</span>
+    <h1 class="fw-extrabold text-dark mb-2">Sumber Informasi & Verifikasi Data</h1>
+    <p class="text-muted mx-auto mb-0" style="max-width: 700px;">
+      Seluruh informasi pada website ini disusun berdasarkan dokumen internal PCM Gatak dan publikasi resmi persyarikatan. Kami tidak mengarang data organisasi demi menjaga akurasi dan etika informasi.
+    </p>
+  </div>
+</div>
+
+<div class="container py-4 py-md-5">
+
+  <!-- Bagian 1: Dokumen Internal PCM Gatak -->
+  <div class="mb-5">
+    <div class="d-flex align-items-center gap-2 mb-3">
+      <span class="p-2 rounded bg-success text-white">
+        <i class="bi bi-file-earmark-text-fill"></i>
+      </span>
+      <div>
+        <h4 class="fw-bold text-dark mb-0">1. Dokumen Internal PCM Gatak</h4>
+        <small class="text-muted">Dokumen resmi yang diserahkan oleh pihak pengurus Cabang Gatak</small>
+      </div>
+    </div>
+
+    <div class="card card-custom p-0 overflow-hidden shadow-sm">
+      <div class="table-responsive">
+        <table class="table table-custom table-hover mb-0">
+          <thead>
+            <tr>
+              <th style="width: 50px;">No</th>
+              <th>Nama Dokumen</th>
+              <th>Data yang Digunakan</th>
+              <th>Tanggal Akses / Pengolahan</th>
+              <th>Status Verifikasi</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for s in sumber_internal %}
+              <tr>
+                <td class="text-center fw-bold text-muted">{{ forloop.counter }}</td>
+                <td class="fw-bold text-success">{{ s.nama_sumber }}</td>
+                <td>{{ s.jenis_informasi }}</td>
+                <td>{{ s.tanggal_akses|date:"d F Y" }}</td>
+                <td><span class="badge bg-success-subtle text-success"><i class="bi bi-check-circle me-1"></i>Terverifikasi</span></td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bagian 2: Sumber Publik & Media Resmi -->
+  <div class="mb-5">
+    <div class="d-flex align-items-center gap-2 mb-3">
+      <span class="p-2 rounded bg-primary text-white">
+        <i class="bi bi-globe2"></i>
+      </span>
+      <div>
+        <h4 class="fw-bold text-dark mb-0">2. Sumber Website & Publikasi Media Resmi</h4>
+        <small class="text-muted">Tautan publik terverifikasi yang digunakan untuk latar belakang dan warta kegiatan</small>
+      </div>
+    </div>
+
+    <div class="card card-custom p-0 overflow-hidden shadow-sm">
+      <div class="table-responsive">
+        <table class="table table-custom table-hover mb-0">
+          <thead>
+            <tr>
+              <th style="width: 50px;">No</th>
+              <th>Nama Sumber</th>
+              <th>URL / Tautan Asli</th>
+              <th>Data yang Digunakan</th>
+              <th>Tanggal Akses</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for s in sumber_publik %}
+              <tr>
+                <td class="text-center fw-bold text-muted">{{ forloop.counter }}</td>
+                <td class="fw-bold text-dark">{{ s.nama_sumber }}</td>
+                <td>
+                  {% if s.url_sumber %}
+                    <a href="{{ s.url_sumber }}" target="_blank" rel="noopener noreferrer" class="text-success text-break small">
+                      {{ s.url_sumber|truncatechars:45 }} <i class="bi bi-box-arrow-up-right ms-1"></i>
+                    </a>
+                  {% else %}
+                    <span class="text-muted">-</span>
+                  {% endif %}
+                </td>
+                <td class="small text-muted">{{ s.jenis_informasi }}</td>
+                <td class="small">{{ s.tanggal_akses|date:"d M Y" }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Catatan Integritas Data Pribadi -->
+  <div class="card card-custom p-4 bg-light border-0">
+    <h5 class="fw-bold text-dark mb-2">
+      <i class="bi bi-shield-check text-success me-2"></i>Komitmen Perlindungan Privasi
+    </h5>
+    <ul class="text-muted small mb-0 ps-3">
+      <li class="mb-1">Nomor WhatsApp dan telepon pribadi pimpinan maupun ketua ranting tidak dipublikasikan demi menjaga privasi pengurus persyarikatan.</li>
+      <li class="mb-1">Foto kegiatan atau pimpinan hanya menggunakan aset yang memiliki lisensi terbuka atau foto simbolis Muhammadiyah tanpa manipulasi identitas.</li>
+      <li>Informasi sejarah khusus PCM Gatak dan visi-misi resmi tidak dikarang, melainkan menunggu keputusan resmi dari pengurus cabang yang bersangkutan.</li>
+    </ul>
+  </div>
+
+</div>
+{% endblock %}

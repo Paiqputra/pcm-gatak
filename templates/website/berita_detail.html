@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ berita.judul }} | PCM GATAK{% endblock %}
+
+{% block content %}
+<!-- Breadcrumb -->
+<div class="py-2 py-md-3 bg-white border-bottom">
+  <div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb mb-0 small">
+        <li class="breadcrumb-item"><a href="{% url 'website:beranda' %}" class="text-success text-decoration-none">Beranda</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'website:berita_daftar' %}" class="text-success text-decoration-none">Berita</a></li>
+        <li class="breadcrumb-item active text-truncate" aria-current="page" style="max-width: 250px;">{{ berita.judul }}</li>
+      </ol>
+    </nav>
+  </div>
+</div>
+
+<div class="container py-4 py-md-5">
+  <div class="row g-4 g-lg-5">
+    <!-- Main Article -->
+    <div class="col-lg-8">
+      <article class="card card-custom p-4 p-md-5">
+        <div class="d-flex flex-wrap gap-2 align-items-center mb-2">
+          <span class="badge bg-success-subtle text-success px-3 py-1">
+            {{ berita.kategori|default:"Warta Kegiatan" }}
+          </span>
+          {% if berita.sumber_url %}
+            <a href="{{ berita.sumber_url }}" target="_blank" rel="noopener noreferrer" class="badge bg-light text-dark border text-decoration-none">
+              <i class="bi bi-box-arrow-up-right me-1 text-success"></i>Sumber: {{ berita.sumber_nama }}
+            </a>
+          {% endif %}
+        </div>
+
+        <h1 class="fw-bold text-dark mb-3" style="font-size: clamp(1.4rem, 3vw, 2.15rem);">
+          {{ berita.judul }}
+        </h1>
+
+        <div class="d-flex flex-wrap align-items-center text-muted small mb-4 pb-3 border-bottom gap-3">
+          <span><i class="bi bi-calendar3 me-1 text-success"></i>{{ berita.tanggal_terbit|date:"d F Y, H:i" }} WIB</span>
+          <span><i class="bi bi-person me-1 text-success"></i>Redaksi PCM Gatak</span>
+        </div>
+
+        {% if berita.catatan_redaksi %}
+          <div class="alert alert-warning border-0 small mb-4">
+            <i class="bi bi-info-circle-fill me-1"></i>
+            <strong>Catatan:</strong> {{ berita.catatan_redaksi }}
+          </div>
+        {% endif %}
+
+        {% if berita.gambar_sampul %}
+          <div class="mb-4 rounded-3 overflow-hidden shadow-sm">
+            <img src="{{ berita.gambar_sampul.url }}" alt="{{ berita.judul }}" class="img-fluid w-100 object-fit-cover" style="max-height: 400px;">
+          </div>
+        {% endif %}
+
+        <!-- Ringkasan -->
+        <div class="lead text-muted fst-italic mb-4 p-3 bg-light rounded-2 border-start border-3 border-success" style="font-size: 1.05rem;">
+          {{ berita.ringkasan }}
+        </div>
+
+        <!-- Isi Berita -->
+        <div class="article-content text-dark leading-relaxed" style="font-size: 1.05rem; line-height: 1.85;">
+          {{ berita.isi|linebreaks }}
+        </div>
+
+        <!-- Sumber Referensi Box -->
+        {% if berita.sumber_url %}
+          <div class="p-3 bg-light rounded-3 border mt-4 small">
+            <div class="fw-bold text-dark mb-1"><i class="bi bi-link-45deg text-success me-1"></i>Tautan Sumber Berita Resmi:</div>
+            <a href="{{ berita.sumber_url }}" target="_blank" rel="noopener noreferrer" class="text-success text-break">
+              {{ berita.sumber_url }} <i class="bi bi-box-arrow-up-right ms-1"></i>
+            </a>
+            <div class="text-muted mt-1" style="font-size: 0.775rem;">Diakses & diverifikasi: 16 November 2026</div>
+          </div>
+        {% endif %}
+
+        <div class="pt-4 border-top mt-4 d-flex justify-content-between align-items-center">
+          <a href="{% url 'website:berita_daftar' %}" class="btn btn-outline-secondary btn-sm">
+            <i class="bi bi-arrow-left me-1"></i> Kembali ke Daftar Berita
+          </a>
+        </div>
+      </article>
+    </div>
+
+    <!-- Sidebar Berita Terkait -->
+    <div class="col-lg-4">
+      <div class="card card-custom p-4 sticky-top" style="top: 90px;">
+        <h5 class="fw-bold mb-3 pb-2 border-bottom text-success">Berita Lainnya</h5>
+        <div class="d-flex flex-column gap-3">
+          {% for b in berita_terkait %}
+            <div class="pb-3 border-bottom">
+              <small class="text-muted d-block mb-1">
+                <i class="bi bi-calendar3 me-1"></i>{{ b.tanggal_terbit|date:"d M Y" }}
+              </small>
+              <h6 class="fw-bold mb-1">
+                <a href="{% url 'website:berita_detail' slug=b.slug %}" class="text-decoration-none text-dark hover-green">
+                  {{ b.judul }}
+                </a>
+              </h6>
+            </div>
+          {% empty %}
+            <p class="text-muted small mb-0">Belum ada berita lainnya.</p>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

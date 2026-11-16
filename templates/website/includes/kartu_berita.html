@@ -1,0 +1,31 @@
+{% load static %}
+<div class="card card-custom h-100">
+  <div class="position-relative" style="height: 200px; background-color: #0b5e34; overflow: hidden;">
+    {% if berita.gambar_sampul %}
+      <img src="{{ berita.gambar_sampul.url }}" class="w-100 h-100 object-fit-cover" alt="{{ berita.judul }}">
+    {% else %}
+      <div class="w-100 h-100 d-flex flex-column align-items-center justify-content-center text-white" style="background: linear-gradient(135deg, #0b5e34, #158047);">
+        <img src="{% static 'img/muhammadiyah.svg' %}" alt="Logo" style="width: 50px; opacity: 0.85;" class="mb-2">
+        <small class="fw-semibold opacity-75">PCM Gatak Berita</small>
+      </div>
+    {% endif %}
+    <span class="badge bg-success position-absolute top-0 end-0 m-3 shadow-sm">
+      <i class="bi bi-calendar3 me-1"></i>{{ berita.tanggal_terbit|date:"d M Y" }}
+    </span>
+  </div>
+  <div class="card-body d-flex flex-column p-4">
+    <h5 class="card-title fw-bold mb-2">
+      <a href="{% url 'website:berita_detail' slug=berita.slug %}" class="text-decoration-none text-dark hover-green">
+        {{ berita.judul }}
+      </a>
+    </h5>
+    <p class="card-text text-muted small flex-grow-1">
+      {{ berita.ringkasan|truncatewords:20 }}
+    </p>
+    <div class="pt-3 border-top mt-auto">
+      <a href="{% url 'website:berita_detail' slug=berita.slug %}" class="btn btn-sm btn-outline-success fw-semibold w-100">
+        Baca Selengkapnya <i class="bi bi-arrow-right ms-1"></i>
+      </a>
+    </div>
+  </div>
+</div>
