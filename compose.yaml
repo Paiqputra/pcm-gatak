@@ -1,0 +1,49 @@
+# ==============================================================================
+# Docker Compose untuk Website PCM Gatak & PostgreSQL 17
+# Perintah: docker compose up --build
+# Akses: http://localhost:8000
+# ==============================================================================
+
+services:
+  db:
+    image: postgres:17
+    container_name: pcm_gatak_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: pcm_gatak_db
+      POSTGRES_USER: pcm_user
+      POSTGRES_PASSWORD: pcm_secure_password_2026
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U pcm_user -d pcm_gatak_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    ports:
+      - "5432:5432"
+
+  web:
+    build: .
+    container_name: pcm_gatak_web
+    restart: unless-stopped
+    environment:
+      SECRET_KEY: django-insecure-docker-pcm-gatak-production-mode-key
+      DEBUG: "False"
+      ALLOWED_HOSTS: "localhost,127.0.0.1"
+      CSRF_TRUSTED_ORIGINS: "http://localhost:8000,http://127.0.0.1:8000"
+      DATABASE_URL: postgresql://pcm_user:pcm_secure_password_2026@db:5432/pcm_gatak_db
+      PORT: "8000"
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - media_data:/app/media
+
+volumes:
+  postgres_data:
+    name: pcm_gatak_postgres_data
+  media_data:
+    name: pcm_gatak_media_data
