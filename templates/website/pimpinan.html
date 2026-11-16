@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Susunan Pimpinan & Majelis | PCM GATAK{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<div class="py-4 py-md-5 bg-white border-bottom">
+  <div class="container text-center">
+    <span class="badge badge-muh mb-2">Struktur Persyarikatan</span>
+    <h1 class="fw-extrabold text-dark mb-2">Susunan Pimpinan & Majelis PCM Gatak</h1>
+    <p class="text-muted mx-auto mb-0" style="max-width: 700px;">
+      Berdasarkan Surat Keputusan (SK) resmi periode Muktamar ke-48 (2022–2027) yang mengemban amanah dakwah dan pembinaan amal usaha di Kecamatan Gatak.
+    </p>
+  </div>
+</div>
+
+<div class="container py-4 py-md-5">
+
+  <!-- Bagian 1: Pimpinan Harian (Ketua & Sekretaris) -->
+  <div class="mb-5">
+    <div class="text-center mb-4">
+      <span class="badge bg-success text-white px-3 py-2 rounded-pill small fw-semibold">Pimpinan Harian Cabang</span>
+      <h3 class="fw-bold text-dark mt-2">Ketua & Sekretaris PCM Gatak</h3>
+      <p class="text-muted small">Periode Muktamar ke-48 (2022–2027)</p>
+    </div>
+
+    <div class="row g-4 justify-content-center">
+      {% for p in pimpinan_harian %}
+        <div class="col-12 col-md-6 col-lg-5">
+          <div class="card card-custom text-center p-4 p-md-5 h-100 border-top border-4 border-success">
+            <div class="mx-auto mb-3" style="width: 100px; height: 100px;">
+              {% if p.foto %}
+                <img src="{{ p.foto.url }}" alt="{{ p.nama }}" class="w-100 h-100 rounded-circle object-fit-cover shadow-sm border border-2 border-success">
+              {% else %}
+                <div class="w-100 h-100 rounded-circle bg-success text-white d-flex align-items-center justify-content-center shadow-sm">
+                  <i class="bi bi-person-fill" style="font-size: 3rem;"></i>
+                </div>
+              {% endif %}
+            </div>
+            
+            <h4 class="fw-bold text-dark mb-1">{{ p.nama }}</h4>
+            <div class="badge bg-success-subtle text-success fs-6 fw-bold mb-2">{{ p.jabatan }}</div>
+            <p class="text-muted small mb-2">Periode: {{ p.periode }}</p>
+            <div class="small text-muted fst-italic p-2 bg-light rounded-2 border">
+              <i class="bi bi-file-earmark-check me-1"></i>{{ p.keterangan_sumber }}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Catatan SK Majelis -->
+  <div class="alert alert-info border-0 shadow-sm d-flex align-items-center gap-3 p-3 mb-5">
+    <i class="bi bi-info-circle-fill fs-3 text-info flex-shrink-0"></i>
+    <div class="small">
+      <strong>Dasar Legalitas Susunan Majelis:</strong> Seluruh susunan pimpinan majelis di bawah ini bersumber dari dokumen resmi <em>"1-SK PIMPINAN CABANG MAJELIS.docx"</em> (Surat Keputusan bertanggal <strong>16 Oktober 2023</strong> untuk periode kepengurusan 2022–2027).
+    </div>
+  </div>
+
+  <!-- Bagian 2: 9 Majelis Pembantu Pimpinan -->
+  <div class="mb-4">
+    <div class="d-flex justify-content-between align-items-end mb-4">
+      <div>
+        <div class="section-tag">Unsur Pembantu Pimpinan</div>
+        <h3 class="fw-bold mb-0">9 Majelis PCM Gatak</h3>
+      </div>
+      <span class="badge bg-secondary text-white">SK 16 Oktober 2023</span>
+    </div>
+
+    <div class="row g-4">
+      {% for m in majelis_list %}
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="card card-custom h-100 d-flex flex-column">
+            <!-- Header Majelis -->
+            <div class="majelis-header">
+              <div class="d-flex justify-content-between align-items-start gap-2">
+                <h6 class="fw-bold text-dark mb-1">{{ m.nama }}</h6>
+                <span class="badge bg-success text-white small" style="font-size: 0.7rem;">Majelis {{ m.urutan }}</span>
+              </div>
+              <small class="text-muted d-block" style="font-size: 0.775rem;">Periode {{ m.periode }}</small>
+            </div>
+
+            <!-- Daftar Anggota Majelis -->
+            <div class="p-3 flex-grow-1">
+              <div class="d-flex flex-column gap-2">
+                {% for ang in m.pengurus_list.all %}
+                  <div class="pengurus-pill">
+                    <span class="fw-semibold text-dark text-truncate me-2" title="{{ ang.nama }}">{{ ang.nama }}</span>
+                    <span class="badge {% if 'Ketua' in ang.jabatan %}bg-success{% elif 'Sekretaris' in ang.jabatan %}bg-primary{% elif 'Bendahara' in ang.jabatan %}bg-warning text-dark{% else %}bg-light text-muted border{% endif %}" style="font-size: 0.725rem; white-space: nowrap;">
+                      {{ ang.jabatan }}
+                    </span>
+                  </div>
+                {% empty %}
+                  <p class="text-muted small mb-0">Susunan pengurus majelis belum terisi.</p>
+                {% endfor %}
+              </div>
+            </div>
+            
+            <div class="p-3 pt-0 mt-auto border-top text-muted text-center" style="font-size: 0.75rem;">
+              <i class="bi bi-check2-circle text-success me-1"></i>Terverifikasi SK 16 Okt 2023
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+</div>
+{% endblock %}
