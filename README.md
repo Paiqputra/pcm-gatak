@@ -8,11 +8,27 @@ Proyek ini dibangun menggunakan **Django 6.x**, **Python 3.13**, dan package man
 
 ## Identitas Kelompok & Mahasiswa
 
+| No | Nama Mahasiswa | NIM | Peran Utama | Akun GitHub |
+|---|---|---|---|---|
+| 1 | **Alif Paiq Saputra** | L200240226 | Backend, Arsitektur Database & Docker | [@Paiqputra](https://github.com/Paiqputra) |
+| 2 | **Farih Abdillah** | L200240234 | Fitur Pencarian Berita, CI/CD GitHub Actions & Testing | [@l200240234-web](https://github.com/l200240234-web) |
+| 3 | **Raditya Ramadhani Listyananda** | L200240243 | Frontend, UI/UX, Template Django & Responsivitas | [@l200240234-web](https://github.com/l200240234-web) |
+| 4 | **Ilham Yahya Haris Maulana** | L200240242 |  Pengembangan Halaman Profil Organisasi, Pimpinan, Ranting & Amal Usaha | [@l200240234-web](https://github.com/l200240234-web) |
+| 5 | **Fergiawan Listanto** | L200240234 | Pengembangan Berita, Agenda, Unduhan, Kontak & Sumber Informasi| [@l200240234-web](https://github.com/l200240234-web) |
+
 * **Mata Kuliah:** Pemrograman Web berbasis Framework (TIF1336)
 * **Program Studi:** Informatika
 * **Perguruan Tinggi:** Universitas Muhammadiyah Surakarta
 
 ### Tabel Pembagian Tugas & Kontribusi Anggota
+
+| Anggota | Rincian Kontribusi & Pengerjaan |
+|---|---|
+| **Alif Paiq Saputra** (L200240226) | 1. Inisialisasi struktur proyek Django 6 & dependensi package manager `uv`<br>2. Perancangan model data: `ProfilOrganisasi`, `Pimpinan`, `Majelis`, `Ranting`, `AmalUsaha`, `Agenda`, `Dokumen`, `SumberInformasi`<br>3. Pembuatan seeder data riil (`seed_pcm.py`) dari berkas SK dan AUM PCM Gatak<br>4. Implementasi base template responsif, Bootstrap 5, navbar, dan footer resmi<br>5. Konfigurasi `Dockerfile`, multi-stage build, user non-root, dan `compose.yaml` PostgreSQL 17 |
+| **Farih Abdillah** (L200240234) | 1. Implementasi **fitur pencarian berita** terpadu (`/berita/?q=...`) berbasis `Q` object Django (**Fitur Bonus +3**)<br>2. Integrasi search bar responsif dan pemeliharaan query pencarian pada kontrol paginasi<br>3. Setup workflow otomasi **GitHub Actions CI** (`.github/workflows/test.yml`) untuk test otomatis setiap push (**Fitur Bonus +4**)<br>4. Penambahan unit testing otomatis untuk validasi fungsionalitas pencarian berita<br>5. Dokumentasi identitas kelompok, transparansi kontribusi pengerjaan, dan pemutakhiran README |
+| **Raditya Ramadhani Listyananda** (L200240243) | 1. Pengembangan tampilan antarmuka website menggunakan Django Templates, Bootstrap 5, Bootstrap Icons, dan Custom CSS.<br>2. Implementasi base.html sebagai template induk yang mencakup header, navbar, footer, dan struktur layout website.<br>3. Pengembangan desain halaman beranda dengan hero banner, kartu statistik, dan tampilan informasi unggulan.<br>4. Implementasi desain responsif untuk perangkat desktop, tablet, dan mobile.<br>5. Pengelolaan aset frontend seperti stylesheet, logo PCM Gatak, dan elemen visual website. |
+| **Ilham Yahya Haris Maulana** (L200240242) | 1. Implementasi halaman Profil Organisasi yang mencakup sejarah, latar belakang, visi, dan misi PCM Gatak.<br>2. Pengembangan halaman Pimpinan yang menampilkan pimpinan harian serta susunan pengurus 9 Majelis berdasarkan SK resmi.<br>3. Pengembangan halaman Ranting yang menampilkan daftar 14 Pimpinan Ranting Muhammadiyah se-Kecamatan Gatak.<br>4. Pengembangan halaman Amal Usaha yang menampilkan 23 unit AUM pendidikan berdasarkan kategori PAUD/TK, MIM, SMP, Pesantren MBS, dan SMA.<br>5. Integrasi data organisasi dari database ke dalam halaman publik agar informasi dapat ditampilkan secara dinamis.|
+| **Fergiawan Listanto** (L200240234) | 1. Pengembangan halaman Berita yang mencakup daftar artikel, detail berita, slug artikel, dan tautan sumber berita asli.<br>2. Implementasi pengelolaan tampilan Agenda untuk memisahkan jadwal kegiatan mendatang dan kegiatan yang telah terlaksana.<br>3. Pengembangan halaman Unduhan sebagai pusat akses dokumen dan publikasi resmi PCM Gatak.<br>4. Implementasi halaman Kontak beserta formulir pesan masyarakat, validasi input, penyimpanan pesan ke database, dan notifikasi Django Messages.<br>5. Pengembangan halaman Sumber Informasi sebagai transparansi dokumen internal dan referensi website publik yang digunakan dalam penyusunan konten website.</td></tr></table> |
 
 ---
 
