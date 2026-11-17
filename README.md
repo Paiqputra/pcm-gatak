@@ -8,21 +8,11 @@ Proyek ini dibangun menggunakan **Django 6.x**, **Python 3.13**, dan package man
 
 ## Identitas Kelompok & Mahasiswa
 
-| No | Nama Mahasiswa | NIM | Peran Utama | Akun GitHub |
-|---|---|---|---|---|
-| 1 | **Alif Paiq Saputra** | L200240226 | Backend, Arsitektur Database & Docker | [@Paiqputra](https://github.com/Paiqputra) |
-| 2 | **Farih Abdillah** | L200240234 | Fitur Pencarian Berita, CI/CD GitHub Actions & Testing | [@l200240234-web](https://github.com/l200240234-web) |
-
 * **Mata Kuliah:** Pemrograman Web berbasis Framework (TIF1336)
 * **Program Studi:** Informatika
 * **Perguruan Tinggi:** Universitas Muhammadiyah Surakarta
 
 ### Tabel Pembagian Tugas & Kontribusi Anggota
-
-| Anggota | Rincian Kontribusi & Pengerjaan |
-|---|---|
-| **Alif Paiq Saputra** (L200240226) | 1. Inisialisasi struktur proyek Django 6 & dependensi package manager `uv`<br>2. Perancangan model data: `ProfilOrganisasi`, `Pimpinan`, `Majelis`, `Ranting`, `AmalUsaha`, `Agenda`, `Dokumen`, `SumberInformasi`<br>3. Pembuatan seeder data riil (`seed_pcm.py`) dari berkas SK dan AUM PCM Gatak<br>4. Implementasi base template responsif, Bootstrap 5, navbar, dan footer resmi<br>5. Konfigurasi `Dockerfile`, multi-stage build, user non-root, dan `compose.yaml` PostgreSQL 17 |
-| **Farih Abdillah** (L200240234) | 1. Implementasi **fitur pencarian berita** terpadu (`/berita/?q=...`) berbasis `Q` object Django (**Fitur Bonus +3**)<br>2. Integrasi search bar responsif dan pemeliharaan query pencarian pada kontrol paginasi<br>3. Setup workflow otomasi **GitHub Actions CI** (`.github/workflows/test.yml`) untuk test otomatis setiap push (**Fitur Bonus +4**)<br>4. Penambahan unit testing otomatis untuk validasi fungsionalitas pencarian berita<br>5. Dokumentasi identitas kelompok, transparansi kontribusi pengerjaan, dan pemutakhiran README |
 
 ---
 
