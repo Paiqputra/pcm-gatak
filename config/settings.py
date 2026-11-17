@@ -28,12 +28,16 @@ SECRET_KEY = os.getenv(
 DEBUG = os.getenv('DEBUG', 'True').lower() in ('true', '1', 'yes')
 
 # ALLOWED_HOSTS: Daftar host yang diizinkan
-allowed_hosts_env = os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1')
+allowed_hosts_env = os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1,.vercel.app')
 ALLOWED_HOSTS = [host.strip() for host in allowed_hosts_env.split(',') if host.strip()]
+if '.vercel.app' not in ALLOWED_HOSTS:
+    ALLOWED_HOSTS.append('.vercel.app')
 
 # CSRF_TRUSTED_ORIGINS: Domain produksi lengkap dengan protokol (http:// atau https://)
-csrf_origins_env = os.getenv('CSRF_TRUSTED_ORIGINS', 'http://localhost:8000,http://127.0.0.1:8000')
+csrf_origins_env = os.getenv('CSRF_TRUSTED_ORIGINS', 'http://localhost:8000,http://127.0.0.1:8000,https://*.vercel.app')
 CSRF_TRUSTED_ORIGINS = [origin.strip() for origin in csrf_origins_env.split(',') if origin.strip()]
+if 'https://*.vercel.app' not in CSRF_TRUSTED_ORIGINS:
+    CSRF_TRUSTED_ORIGINS.append('https://*.vercel.app')
 
 
 # Application definition
@@ -97,10 +101,19 @@ if DATABASE_URL:
         )
     }
 else:
+    db_path = BASE_DIR / 'db.sqlite3'
+    # Jika berjalan di Vercel/serverless (filesystem read-only):
+    if os.getenv('VERCEL') or os.environ.get('AWS_LAMBDA_FUNCTION_NAME') or not os.access(BASE_DIR, os.W_OK):
+        import shutil
+        tmp_db = Path('/tmp') / 'db.sqlite3'
+        if db_path.exists() and (not tmp_db.exists() or tmp_db.stat().st_size == 0):
+            shutil.copy2(db_path, tmp_db)
+        db_path = tmp_db
+
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
+            'NAME': db_path,
         }
     }
 
@@ -151,6 +164,7 @@ STORAGES = {
         "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
     },
 }
+WHITENOISE_USE_FINDERS = True
 
 # Media files (User uploads: foto pimpinan, gambar berita, dokumen)
 MEDIA_URL = '/media/'
